@@ -9,6 +9,8 @@ if(isset($disconnect)){
     $user->disconnect();
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +26,7 @@ if(isset($disconnect)){
 
     <h1>Module de connexion</h1>
     <p>Class POO</p>
+
 <?php if(isset($_SESSION['login'])):?>
     <?php    echo $_SESSION['login']." " . "vous etes connecté"; ?>
     <form action="" method="POST">
@@ -34,6 +37,7 @@ if(isset($disconnect)){
     </form>
 
 <?php endif; ?>
+
 
 </body>
 </html>

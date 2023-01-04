@@ -10,6 +10,7 @@ class User
     private $id;
     public $login;
     public $email;
+    public $password;
     public $firstname;
     public $lastname;
     private $db;
@@ -28,7 +29,7 @@ class User
         if(!$this->db){
             die("Connexion lost");
         }else{
-            echo "Connexion etablie";
+            //echo "Connexion etablie";
         }
 
     }
@@ -144,6 +145,106 @@ class User
             echo "profil no update :(";
         }
 
+    }
+
+    public function isConnected(){
+
+        if(isset($_SESSION['login'])){
+            echo "<br>";
+            echo 'Votre etes connecté en tant que ' . ucwords($_SESSION['login']) ;
+            echo "<br>";
+            global $isConnected;
+            return $isConnected=true;
+
+        }
+    }
+
+    public function getAllInfos(){
+
+        if(isset($_SESSION['login'])){
+
+            $login=$_SESSION['login'];
+            $get_query="SELECT * FROM utilisateurs WHERE login ='$login'";
+            $get_request=mysqli_query($this->db,$get_query);
+            $get_fetch=mysqli_fetch_all($get_request,MYSQLI_ASSOC);
+            //var_dump($get_fetch);
+
+            foreach($get_fetch as $fetch){
+                echo "<br>";
+                echo $fetch['login'];
+                echo "<br>";
+                echo $fetch['password'];
+                echo "<br>";
+                echo $fetch['email'];
+                echo "<br>";
+                echo $fetch['firstname'];
+                echo "<br>";
+                echo $fetch['lastname'];
+                echo "<hr>";
+
+
+                
+
+                
+            }
+        }
+    }
+
+    public function getLogin(){
+        if(isset($_SESSION['login'])){
+            $login=$_SESSION['login'];
+
+            $get_query="SELECT * FROM utilisateurs WHERE login ='$login'";
+            $get_request=mysqli_query($this->db,$get_query);
+            $get_fetch=mysqli_fetch_all($get_request,MYSQLI_ASSOC);
+
+            foreach($get_fetch as $fetch){
+                echo "votre login est : " .$fetch['login'];
+                echo "<hr>";
+            }
+        }
+    }
+    public function getEmail(){
+        if(isset($_SESSION['login'])){
+            $login=$_SESSION['login'];
+
+            $get_query="SELECT * FROM utilisateurs WHERE login ='$login'";
+            $get_request=mysqli_query($this->db,$get_query);
+            $get_fetch=mysqli_fetch_all($get_request,MYSQLI_ASSOC);
+
+            foreach($get_fetch as $fetch){
+                echo "votre email est : " .$fetch['email'];
+                echo "<hr>";
+            }
+        }
+    }
+    public function getFirstName(){
+        if(isset($_SESSION['login'])){
+            $login=$_SESSION['login'];
+
+            $get_query="SELECT * FROM utilisateurs WHERE login ='$login'";
+            $get_request=mysqli_query($this->db,$get_query);
+            $get_fetch=mysqli_fetch_all($get_request,MYSQLI_ASSOC);
+
+            foreach($get_fetch as $fetch){
+                echo "votre first name est : " .$fetch['firstname'];
+                echo "<hr>";
+            }
+        }
+    }
+    public function getLastName(){
+        if(isset($_SESSION['login'])){
+            $login=$_SESSION['login'];
+
+            $get_query="SELECT * FROM utilisateurs WHERE login ='$login'";
+            $get_request=mysqli_query($this->db,$get_query);
+            $get_fetch=mysqli_fetch_all($get_request,MYSQLI_ASSOC);
+
+            foreach($get_fetch as $fetch){
+                echo "votre last name est : " .$fetch['login'];
+                echo "<hr>";
+            }
+        }
     }
 }
 
