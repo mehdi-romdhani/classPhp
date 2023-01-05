@@ -1,5 +1,6 @@
 <?php
-require_once("./Models/user.php");
+//require_once("./Models/user.php");
+require_once('./Models/user-pdo.php');
 @$submit=$_POST['submit'];
 
 if(isset($submit)){
@@ -10,7 +11,8 @@ if(isset($submit)){
     $email=$_POST['email'];
     $password=$_POST['password'];
 
-        $new_user= new User();
+        //$new_user= new User();
+        $new_user=new UserPdo();
         $new_user->register($login,$password,$email,$firstname,$lastname);
 }
 

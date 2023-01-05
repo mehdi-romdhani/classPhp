@@ -1,13 +1,23 @@
 <?php 
 session_start();
-include('./Models/user.php');
+//include('./Models/user.php');
+include('./Models/user-pdo.php');
 
 if(isset($_POST['update'])){
-    $user=new User();
-    $user->update($_POST['login'],$_POST['password'],$_POST['email'],$_POST['firstname'],$_POST['lastname']);
-}
+    //$user=new User();
+    if(empty($_POST['password'])){
+        echo " no possible to do update please enter something";
+    }else{
+        
+        $user=new UserPdo();
+        $user->update($_POST['login'],$_POST['password'],$_POST['email'],$_POST['firstname'],$_POST['lastname']);
+    }
+
+    }
+
 if(isset($_POST['delete'])){
-    $user=new User();
+    //$user=new User();
+    $user=new UserPdo();
     $user->delete();
     $user->disconnect();
 }
@@ -59,14 +69,18 @@ if(isset($_POST['delete'])){
     </div>
 
     <div class="container">
+    <div class="container">
         <?php
-            $user_on=new User();
+            //$user_on=new User();
+            $user_on=new UserPdo();
+
             $bool = $user_on->isConnected();
             echo "<br>";
             echo "le boolean est si le user est connect : " . $bool;
-            $fetch_user=new User();
-            $fetch_user->getAllInfos();
-            $fetch_user->getLogin();
+            //$fetch_user=new User();
+            $fetch_user=new UserPdo();//instance nouvelle obj
+            $fetch_user->getAllInfos();//mehtod de la class userpdo
+            $fetch_user->getLogin();//method
             $fetch_user->getEmail();
             $fetch_user->getFirstName();
             $fetch_user->getLastName();

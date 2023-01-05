@@ -1,22 +1,27 @@
 <?php 
 session_start();
 
-require_once('./Models/user.php');
+//require_once('./Models/user.php');
+require_once('./Models/user-pdo.php');
 
 @$submit=$_POST['submit'];
 
 if(isset($submit)){
     $login=$_POST['login'];
     $password=$_POST['password'];
-    
-    $user=new User();
-    $user->connect($login,$password);
+
+    //$user=new User();
+    $user=new UserPdo();
+    $user->Connect($login,$password);
+
 }
 
 @$disconnect=$_POST['deconnexion'];
 
 if(isset($disconnect)){
-    $user=new User();
+    //$user=new User();
+
+    $user=new UserPdo();
     $user->disconnect();
 }
 
@@ -59,6 +64,8 @@ if(isset($disconnect)){
             <br>
             <br>
             <input type="submit"  name="submit" value="sign-in">
+            <hr>
+            
         </form>
 <?php } ?>
     </div>

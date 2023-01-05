@@ -1,13 +1,23 @@
 <?php
 session_start();
-include('./Models/user.php');
+
+//include('./Models/user.php');
+include('./Models/user-pdo.php');
 
 @$disconnect=$_POST['deconnexion'];
 
-if(isset($disconnect)){
-    $user=new User();
+
+
+
+//Use class User 
+
+ if(isset($disconnect)){
+    //$user=new User();
+    $user=new UserPdo();
     $user->disconnect();
 }
+ 
+
 
 
 
